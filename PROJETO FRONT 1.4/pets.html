@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adote um Pet</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <header class="cabecalho">
+    <a href="inicio.html" class="logo">Adote um Pet</a>
+    <nav class="menu">
+      <ul>
+        <li><a href="inicio.html">Início</a></li>
+        <li><a href="pets.html">Pets</a></li>
+        <li><a href="comoadotar.html">Como adotar</a></li>
+        <li><a href="sobre.html">Sobre</a></li>
+        <li><a href="contato.html">Contato</a></li>
+      </ul>
+    </nav>
+    <button type="button" id="btn-modo" class="btn-modo">🌙</button>
+  </header>
+
+  <main>
+    <section id="pets" class="pets">
+      <h2>Pets para adoção</h2>
+
+      <form class="filtros" id="filtros">
+        <label for="filtro-especie">Espécie</label>
+        <select id="filtro-especie">
+          <option value="todos">Todos</option>
+          <option value="cachorro">Cachorros</option>
+          <option value="gato">Gatos</option>
+        </select>
+
+        <label for="filtro-porte">Porte</label>
+        <select id="filtro-porte">
+          <option value="todos">Todos</option>
+          <option value="pequeno">Pequeno</option>
+          <option value="medio">Médio</option>
+          <option value="grande">Grande</option>
+        </select>
+      </form>
+
+      <button type="button" id="ver-favoritos">❤️ Meus Favoritos</button>
+
+      <div class="lista-pets" id="lista-pets">
+
+        <article class="card-pet" data-especie="cachorro" data-porte="medio">
+          <button class="btn-favorito" type="button">♡</button>
+          <img src="imagens/cachorro-medio-porte.jpg" alt="Cachorro Thor">
+          <div class="card-info">
+            <h3>Thor</h3>
+            <p>Cachorro · 2 anos · Porte médio</p>
+            <p>Brincalhão, sociável e adora passear.</p>
+            <a href="contato.html" class="botao">Quero adotar</a>
+          </div>
+        </article>
+
+        <article class="card-pet" data-especie="gato" data-porte="pequeno">
+           <button class="btn-favorito" type="button">♡</button>
+          <img src="imagens/gata.jpg" alt="Gata Mia">
+          <div class="card-info">
+            <h3>Mia</h3>
+            <p>Gata · 1 ano · Porte pequeno</p>
+            <p>Calma, carinhosa e muito curiosa.</p>
+            <a href="contato.html" class="botao">Quero adotar</a>
+          </div>
+        </article>
+
+        <article class="card-pet" data-especie="cachorro" data-porte="grande">
+           <button class="btn-favorito" type="button">♡</button>
+          <img src="imagens/cachorro-grande-porte.jpg" alt="Cachorro Bruce">
+          <div class="card-info">
+            <h3>Bruce</h3>
+            <p>Cachorro · 4 anos · Porte grande</p>
+            <p>Dócil, protetor e ótimo com crianças.</p>
+            <a href="contato.html" class="botao">Quero adotar</a>
+          </div>
+        </article>
+
+        <article class="card-pet" data-especie="cachorro" data-porte="pequeno">
+           <button class="btn-favorito" type="button">♡</button>
+          <img src="imagens/cachorro-pequeno-porte.jpg" alt="Cachorro Bilu">
+          <div class="card-info">
+            <h3>Bilu</h3>
+            <p>Cachorro · 1 ano · Porte pequeno</p>
+            <p>Dócil, divertido e cheio de personalidade!</p>
+            <a href="contato.html" class="botao">Quero adotar</a>
+          </div>
+        </article>
+
+        <article class="card-pet" data-especie="cachorro" data-porte="pequeno">
+           <button class="btn-favorito" type="button">♡</button>
+          <img src="imagens/cachorro-pequeno-porte3.jpg" alt="Cachorro filó">
+          <div class="card-info">
+            <h3>Filó</h3>
+            <p>Cachorro · 4 anos · Porte pequeno</p>
+            <p>Companheira, alegre e muito carinhosa!</p>
+            <a href="contato.html" class="botao">Quero adotar</a>
+          </div>
+        </article>
+
+        <article class="card-pet" data-especie="cachorro" data-porte="grande">
+           <button class="btn-favorito" type="button">♡</button>
+          <img src="imagens/cachorro-grande-porte2.jpg" alt="Cachorro Relampago">
+          <div class="card-info">
+            <h3>Relâmpago</h3>
+            <p>Cachorro · 5 anos · Porte grande</p>
+            <p>Forte, brincalhão e cheio de energia!</p>
+            <a href="contato.html" class="botao">Quero adotar</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+  </main>
+    
+  <footer class="rodape">
+    <p>&copy; 2026 Adote um Pet. Todos os direitos reservados.</p>
+    <p>contato@adoteumpet.com · (11) 99999-9999</p>
+  </footer>
+</body>
+</html>
