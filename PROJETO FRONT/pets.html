@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Adote um Pet</title>
+  <title>Pets para adoção | Adote um Pet</title>
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
@@ -20,7 +20,14 @@
         <li><a href="contato.html">Contato</a></li>
       </ul>
     </nav>
-    <button type="button" id="btn-modo" class="btn-modo">🌙</button>
+    <div class="acoes-cabecalho">
+        <div class="controles-acessibilidade" role="group" aria-label="Ferramentas de acessibilidade">
+          <button type="button" data-fonte="diminuir" aria-label="Diminuir tamanho do texto">A−</button>
+          <button type="button" data-fonte="aumentar" aria-label="Aumentar tamanho do texto">A+</button>
+          <button type="button" id="btn-contraste" aria-pressed="false">Alto contraste</button>
+        </div>
+        <button type="button" id="btn-modo" class="btn-modo" role="switch" aria-checked="false" aria-label="Ativar modo escuro"><span class="icone-modo icone-sol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path></svg></span><span class="icone-modo icone-lua" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.5 15.5A8.5 8.5 0 0 1 8.5 3.5 8.5 8.5 0 1 0 20.5 15.5Z"></path><path d="m17 3 .6 1.7L19.3 5.3l-1.7.6L17 7.6l-.6-1.7-1.7-.6 1.7-.6L17 3Zm3 6 .4 1.1 1.1.4-1.1.4L20 12l-.4-1.1-1.1-.4 1.1-.4L20 9Z"></path></svg></span><span class="trilho-modo" aria-hidden="true"></span></button>
+</div>
   </header>
 
   <main>
@@ -49,68 +56,68 @@
       <div class="lista-pets" id="lista-pets">
 
         <article class="card-pet" data-especie="cachorro" data-porte="medio">
-          <button class="btn-favorito" type="button">♡</button>
+          <button class="btn-favorito" type="button" aria-pressed="false" aria-label="Adicionar Thor aos favoritos">♡</button>
           <img src="imagens/cachorro-medio-porte.jpg" alt="Cachorro Thor">
           <div class="card-info">
             <h3>Thor</h3>
             <p>Cachorro · 2 anos · Porte médio</p>
             <p>Brincalhão, sociável e adora passear.</p>
-            <a href="contato.html" class="botao">Quero adotar</a>
+            <a href="contato.html?pet=thor" class="botao">Quero adotar</a>
           </div>
         </article>
 
         <article class="card-pet" data-especie="gato" data-porte="pequeno">
-           <button class="btn-favorito" type="button">♡</button>
+           <button class="btn-favorito" type="button" aria-pressed="false" aria-label="Adicionar Mia aos favoritos">♡</button>
           <img src="imagens/gata.jpg" alt="Gata Mia">
           <div class="card-info">
             <h3>Mia</h3>
             <p>Gata · 1 ano · Porte pequeno</p>
             <p>Calma, carinhosa e muito curiosa.</p>
-            <a href="contato.html" class="botao">Quero adotar</a>
+            <a href="contato.html?pet=mia" class="botao">Quero adotar</a>
           </div>
         </article>
 
         <article class="card-pet" data-especie="cachorro" data-porte="grande">
-           <button class="btn-favorito" type="button">♡</button>
+           <button class="btn-favorito" type="button" aria-pressed="false" aria-label="Adicionar Bruce aos favoritos">♡</button>
           <img src="imagens/cachorro-grande-porte.jpg" alt="Cachorro Bruce">
           <div class="card-info">
             <h3>Bruce</h3>
             <p>Cachorro · 4 anos · Porte grande</p>
             <p>Dócil, protetor e ótimo com crianças.</p>
-            <a href="contato.html" class="botao">Quero adotar</a>
+            <a href="contato.html?pet=bruce" class="botao">Quero adotar</a>
           </div>
         </article>
 
         <article class="card-pet" data-especie="cachorro" data-porte="pequeno">
-           <button class="btn-favorito" type="button">♡</button>
+           <button class="btn-favorito" type="button" aria-pressed="false" aria-label="Adicionar Bilu aos favoritos">♡</button>
           <img src="imagens/cachorro-pequeno-porte.jpg" alt="Cachorro Bilu">
           <div class="card-info">
             <h3>Bilu</h3>
             <p>Cachorro · 1 ano · Porte pequeno</p>
             <p>Dócil, divertido e cheio de personalidade!</p>
-            <a href="contato.html" class="botao">Quero adotar</a>
+            <a href="contato.html?pet=bilu" class="botao">Quero adotar</a>
           </div>
         </article>
 
         <article class="card-pet" data-especie="cachorro" data-porte="pequeno">
-           <button class="btn-favorito" type="button">♡</button>
+           <button class="btn-favorito" type="button" aria-pressed="false" aria-label="Adicionar Filó aos favoritos">♡</button>
           <img src="imagens/cachorro-pequeno-porte3.jpg" alt="Cachorro filó">
           <div class="card-info">
             <h3>Filó</h3>
             <p>Cachorro · 4 anos · Porte pequeno</p>
             <p>Companheira, alegre e muito carinhosa!</p>
-            <a href="contato.html" class="botao">Quero adotar</a>
+            <a href="contato.html?pet=filo" class="botao">Quero adotar</a>
           </div>
         </article>
 
         <article class="card-pet" data-especie="cachorro" data-porte="grande">
-           <button class="btn-favorito" type="button">♡</button>
+           <button class="btn-favorito" type="button" aria-pressed="false" aria-label="Adicionar Relâmpago aos favoritos">♡</button>
           <img src="imagens/cachorro-grande-porte2.jpg" alt="Cachorro Relampago">
           <div class="card-info">
             <h3>Relâmpago</h3>
             <p>Cachorro · 5 anos · Porte grande</p>
             <p>Forte, brincalhão e cheio de energia!</p>
-            <a href="contato.html" class="botao">Quero adotar</a>
+            <a href="contato.html?pet=relampago" class="botao">Quero adotar</a>
           </div>
         </article>
 
@@ -120,6 +127,7 @@
     
   <footer class="rodape">
     <p>&copy; 2026 Adote um Pet. Todos os direitos reservados.</p>
+    <p class="aviso-prototipo">Projeto acadêmico demonstrativo · informações fictícias</p>
     <p>contato@adoteumpet.com · (11) 99999-9999</p>
   </footer>
 </body>
