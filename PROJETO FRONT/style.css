@@ -20,8 +20,8 @@
   --overlay-hero: rgba(235, 242, 232, 0.65);
 }
 
-body.modo-escuro 
-{
+body.modo-escuro,
+body:has(#btn-modo:checked) {
   --fundo: #121714;
   --texto: #e6ede8;
   --superficie: #1c2420;
@@ -52,7 +52,21 @@ body.modo-escuro
   background: var(--switch-fundo);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+  text-decoration: none;
+  user-select: none;
   transition: background-color .35s ease, border-color .35s ease;
+}
+
+.btn-modo input[type="checkbox"] {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  cursor: pointer;
 }
 
 .btn-modo .trilho-modo {
@@ -74,10 +88,10 @@ body.modo-escuro
 .btn-modo .icone-lua svg path { fill: currentColor; stroke: none; }
 .btn-modo .icone-sol { left: 11px; opacity: 1; transform: scale(1) rotate(0); }
 .btn-modo .icone-lua { right: 11px; opacity: 0; transform: scale(.55) rotate(-35deg); }
-.btn-modo[aria-checked="true"] .trilho-modo { transform: translateX(36px); }
-.btn-modo[aria-checked="true"] .icone-sol { opacity: 0; transform: scale(.55) rotate(35deg); }
-.btn-modo[aria-checked="true"] .icone-lua { opacity: 1; transform: scale(1) rotate(0); }
-.btn-modo:focus-visible { outline: 2px solid var(--destaque); outline-offset: 4px; }
+.btn-modo input:checked ~ .trilho-modo { transform: translateX(36px); }
+.btn-modo input:checked ~ .icone-sol { opacity: 0; transform: scale(.55) rotate(35deg); }
+.btn-modo input:checked ~ .icone-lua { opacity: 1; transform: scale(1) rotate(0); }
+.btn-modo:has(input:focus-visible) { outline: 2px solid var(--destaque); outline-offset: 4px; }
 
 * {
   box-sizing: border-box;
@@ -713,7 +727,8 @@ na frente da imagem de fundo */
   outline-offset: 2px;
 }
 
-body.alto-contraste {
+body.alto-contraste,
+body.alto-contraste:has(#btn-modo:checked) {
   --fundo: #000;
   --texto: #fff;
   --superficie: #000;

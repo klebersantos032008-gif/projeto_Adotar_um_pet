@@ -26,7 +26,7 @@
           <button type="button" data-fonte="aumentar" aria-label="Aumentar tamanho do texto">A+</button>
           <button type="button" id="btn-contraste" aria-pressed="false">Alto contraste</button>
         </div>
-        <button type="button" id="btn-modo" class="btn-modo" role="switch" aria-checked="false" aria-label="Ativar modo escuro"><span class="icone-modo icone-sol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path></svg></span><span class="icone-modo icone-lua" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.5 15.5A8.5 8.5 0 0 1 8.5 3.5 8.5 8.5 0 1 0 20.5 15.5Z"></path><path d="m17 3 .6 1.7L19.3 5.3l-1.7.6L17 7.6l-.6-1.7-1.7-.6 1.7-.6L17 3Zm3 6 .4 1.1 1.1.4-1.1.4L20 12l-.4-1.1-1.1-.4 1.1-.4L20 9Z"></path></svg></span><span class="trilho-modo" aria-hidden="true"></span></button>
+        <label class="btn-modo" title="Alternar entre modo claro e escuro"><input type="checkbox" id="btn-modo" role="switch" aria-label="Alternar entre modo claro e escuro"><span class="icone-modo icone-sol" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path></svg></span><span class="icone-modo icone-lua" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20.5 15.5A8.5 8.5 0 0 1 8.5 3.5 8.5 8.5 0 1 0 20.5 15.5Z"></path><path d="m17 3 .6 1.7L19.3 5.3l-1.7.6L17 7.6l-.6-1.7-1.7-.6 1.7-.6L17 3Zm3 6 .4 1.1 1.1.4-1.1.4L20 12l-.4-1.1-1.1-.4 1.1-.4L20 9Z"></path></svg></span><span class="trilho-modo" aria-hidden="true"></span></label>
 </div>
   </header>
 
@@ -54,7 +54,6 @@
       <button type="button" id="ver-favoritos">❤️ Meus Favoritos</button>
 
       <div class="lista-pets" id="lista-pets">
-
         <article class="card-pet" data-especie="cachorro" data-porte="medio">
           <button class="btn-favorito" type="button" aria-pressed="false" aria-label="Adicionar Thor aos favoritos">♡</button>
           <img src="imagens/cachorro-medio-porte.jpg" alt="Cachorro Thor">
@@ -74,6 +73,39 @@
             <p>Gata · 1 ano · Porte pequeno</p>
             <p>Calma, carinhosa e muito curiosa.</p>
             <a href="contato.html?pet=mia" class="botao">Quero adotar</a>
+          </div>
+        </article>
+
+        <article class="card-pet" data-especie="gato" data-porte="pequeno">
+           <button class="btn-favorito" type="button" aria-pressed="false" aria-label="Adicionar Sol aos favoritos">♡</button>
+          <img src="imagens/gata2.jpeg" alt="Gata Sol">
+          <div class="card-info">
+            <h3>Sol</h3>
+            <p>Gata · 2 anos · Porte pequeno</p>
+            <p>Calma, companheira e muito sociável.</p>
+            <a href="contato.html?pet=sol" class="botao">Quero adotar</a>
+          </div>
+        </article>
+
+        <article class="card-pet" data-especie="gato" data-porte="pequeno">
+           <button class="btn-favorito" type="button" aria-pressed="false" aria-label="Adicionar Jade aos favoritos">♡</button>
+          <img src="imagens/gata3.jpeg" alt="Gata Jade">
+          <div class="card-info">
+            <h3>Jade</h3>
+            <p>Gata · 5 anos · Porte pequeno</p>
+            <p>Tímida, carinhosa e inteligente.</p>
+            <a href="contato.html?pet=jade" class="botao">Quero adotar</a>
+          </div>
+        </article>
+
+        <article class="card-pet" data-especie="gato" data-porte="pequeno">
+           <button class="btn-favorito" type="button" aria-pressed="false" aria-label="Adicionar Pecinha aos favoritos">♡</button>
+          <img src="imagens/gata4.jpeg" alt="Gato Pecinha">
+          <div class="card-info">
+            <h3>Pecinha</h3>
+            <p>Gato · 4 meses · Porte pequeno</p>
+            <p>Energético, divertido e brincalhão.</p>
+            <a href="contato.html?pet=pecinha" class="botao">Quero adotar</a>
           </div>
         </article>
 
@@ -100,8 +132,19 @@
         </article>
 
         <article class="card-pet" data-especie="cachorro" data-porte="pequeno">
+           <button class="btn-favorito" type="button" aria-pressed="false" aria-label="Adicionar Pitucho aos favoritos">♡</button>
+          <img src="imagens/cachorro-pequeno-porte2.jpeg" alt="Cachorro Pitucho">
+          <div class="card-info">
+            <h3>Pitucho</h3>
+            <p>Cachorro · 8 meses · Porte pequeno</p>
+            <p>Energético, divertido e cheio de personalidade!</p>
+            <a href="contato.html?pet=pitucho" class="botao">Quero adotar</a>
+          </div>
+        </article>
+
+        <article class="card-pet" data-especie="cachorro" data-porte="pequeno">
            <button class="btn-favorito" type="button" aria-pressed="false" aria-label="Adicionar Filó aos favoritos">♡</button>
-          <img src="imagens/cachorro-pequeno-porte3.jpg" alt="Cachorro filó">
+          <img src="imagens/cachorro-pequeno-porte3.jpg" alt="Cachorro Filó">
           <div class="card-info">
             <h3>Filó</h3>
             <p>Cachorro · 4 anos · Porte pequeno</p>
@@ -121,6 +164,60 @@
           </div>
         </article>
 
+        <article class="card-pet" data-especie="cachorro" data-porte="grande">
+           <button class="btn-favorito" type="button" aria-pressed="false" aria-label="Adicionar Zoom aos favoritos">♡</button>
+          <img src="imagens/cachorro-grande-porte3.jpeg" alt="Cachorro Zoom">
+          <div class="card-info">
+            <h3>Zoom</h3>
+            <p>Cachorro · 3 anos · Porte grande</p>
+            <p>Forte, brincalhão e pronto para brincar!</p>
+            <a href="contato.html?pet=zoom" class="botao">Quero adotar</a>
+          </div>
+        </article>
+
+        <article class="card-pet" data-especie="cachorro" data-porte="medio">
+          <button class="btn-favorito" type="button" aria-pressed="false" aria-label="Adicionar Bela aos favoritos">♡</button>
+          <img src="imagens/cachorro-medio-porte2.jpeg" alt="Cachorro Bela">
+          <div class="card-info">
+            <h3>Bela</h3>
+            <p>Cachorra · 2 anos · Porte médio</p>
+            <p>Dócil, sociável e adora passear.</p>
+            <a href="contato.html?pet=bela" class="botao">Quero adotar</a>
+          </div>
+        </article>
+
+        <article class="card-pet" data-especie="cachorro" data-porte="medio">
+          <button class="btn-favorito" type="button" aria-pressed="false" aria-label="Adicionar Rex aos favoritos">♡</button>
+          <img src="imagens/cachorro-medio-porte3.jpeg" alt="Cachorro Rex">
+          <div class="card-info">
+            <h3>Rex</h3>
+            <p>Cachorro · 2 anos · Porte médio</p>
+            <p>Carinhoso, sociável e adora brincar.</p>
+            <a href="contato.html?pet=rex" class="botao">Quero adotar</a>
+          </div>
+        </article>
+
+        <article class="card-pet" data-especie="cachorro" data-porte="medio">
+          <button class="btn-favorito" type="button" aria-pressed="false" aria-label="Adicionar Mel aos favoritos">♡</button>
+          <img src="imagens/cachorro-medio-porte4.jpeg" alt="Cachorro Mel">
+          <div class="card-info">
+            <h3>Mel</h3>
+            <p>Cachorra · 3 anos · Porte médio</p>
+            <p>Divertida, amável e adora carinho.</p>
+            <a href="contato.html?pet=mel" class="botao">Quero adotar</a>
+          </div>
+        </article>
+
+        <article class="card-pet" data-especie="cachorro" data-porte="medio">
+          <button class="btn-favorito" type="button" aria-pressed="false" aria-label="Adicionar Chefe aos favoritos">♡</button>
+          <img src="imagens/cachorro-medio-porte5.jpeg" alt="Cachorro Chefe">
+          <div class="card-info">
+            <h3>Chefe</h3>
+            <p>Cachorro · 6 anos · Porte médio</p>
+            <p>Calmo, protetor e companheiro.</p>
+            <a href="contato.html?pet=chefe" class="botao">Quero adotar</a>
+          </div>
+        </article>
       </div>
     </section>
   </main>

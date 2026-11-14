@@ -1,150 +1,146 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const raiz = document.documentElement;
-  const escalaSalva = Number(localStorage.getItem("escalaTexto"));
-  let escalaTexto = Number.isFinite(escalaSalva) && escalaSalva
-    ? Math.min(1.5, Math.max(0.8, escalaSalva))
-    : 1;
+document.addEventListener("DOMContentLoaded", function() {
 
-  function aplicarEscalaTexto() {
-    raiz.style.setProperty("--escala-texto", escalaTexto);
-    localStorage.setItem("escalaTexto", String(escalaTexto));
-  }
+    // Encontrar os filtros de especie
 
-  aplicarEscalaTexto();
+    const filtroEspecie = document.querySelector("#filtro-especie");
+    const filtroPorte = document.querySelector("#filtro-porte");
 
-  document.querySelectorAll("[data-fonte]").forEach(function (botao) {
-    botao.addEventListener("click", function () {
-      const ajuste = botao.dataset.fonte === "aumentar" ? 0.1 : -0.1;
-      escalaTexto = Math.min(1.5, Math.max(0.8, Math.round((escalaTexto + ajuste) * 10) / 10));
-      aplicarEscalaTexto();
-    });
-  });
+    //Seleciona todos os cards de animais
+    const pets = document.querySelectorAll(".card-pet")
 
-  const botaoContraste = document.querySelector("#btn-contraste");
-  if (botaoContraste) {
-    const contrasteSalvo = localStorage.getItem("altoContraste") === "sim";
-    document.body.classList.toggle("alto-contraste", contrasteSalvo);
-    botaoContraste.setAttribute("aria-pressed", String(contrasteSalvo));
+    // Seleciona os botões de favoritos e lista 
+    const botoesFavoritos = document.querySelectorAll(".btn-favorito")
+    const botaoVerfavoritos = document.querySelector("#ver-favoritos")
+    
+    //Controla se a lista esta mostrando apenas os favoritos
+    let mostrandoFavoritos = false
 
-    botaoContraste.addEventListener("click", function () {
-      const ativo = document.body.classList.toggle("alto-contraste");
-      botaoContraste.setAttribute("aria-pressed", String(ativo));
-      localStorage.setItem("altoContraste", ativo ? "sim" : "nao");
-    });
-  }
+    //Recupera os favoritos salvos no navegador
+    let favoritos = JSON.parse(localStorage.getItem("petsFavoritos")) || []
 
-  const btnModo = document.querySelector("#btn-modo");
+    //Percorre todos os botões de favoritos
+    botoesFavoritos.forEach(function(botao) {
 
-  if (btnModo) {
-    const atualizarControleModo = function () {
-      const escuro = document.body.classList.contains("modo-escuro");
-      btnModo.setAttribute("aria-checked", String(escuro));
-      btnModo.setAttribute("aria-label", escuro ? "Ativar modo claro" : "Ativar modo escuro");
-    };
+        //Encontra o card e o nome do animal correspondente ao botão
+        const card = botao.closest(".card-pet")
+        const nomePet = card.querySelector("h3").textContent
 
-    if (localStorage.getItem("modoEscuro") === "sim") {
-      document.body.classList.add("modo-escuro");
+        //Verifica se o animal ja esta salvo nos favoritos
+        if(favoritos.includes(nomePet)){
+           botao.classList.add("favoritado");
+            botao.textContent = "♥"; 
+        }
+
+        //Adicionar um evento de click ao bptão de favorito
+        botao.addEventListener("click",function(){
+
+
+            //Verificar se o animal ja está na lista de favoritos
+            if(favoritos.includes(nomePet)){
+
+                // Remover o animal da lista de favoritos
+                favoritos = favoritos.filter(function(nome){
+                    return nome !== nomePet
+                })
+
+                //Alterar o coração para indicar que não esta favoritado
+                botao.classList.remove("favoritado")
+                botao.textContent = "♡"
+            }
+            else {
+                /*Adicionar o animal á lista de favoritos e 
+                 Alterar o coração para indicar que está favoritado*/
+                favoritos.push(nomePet)
+                botao.classList.add("favoritado")
+                botao.textContent = "♥"
+            }
+
+            /*Salva a lista atualizada no amazenamento do navegador
+            /e atualiza os animais exibidos*/
+            localStorage.setItem("petsFavoritos",JSON.stringify(favoritos))
+             atualizarPets()
+
+        })
+    })
+
+    //Verifica se os filtros existem na pagina
+    if (!filtroEspecie || !filtroPorte){
+        return
+        }
+
+    //Função responsável por filtrar e atualizar os animais exibidos
+    function atualizarPets(){
+
+        //Percorrer todos os cads de Animais 
+        pets.forEach(function(pet){
+
+            //Obter o nome, a especie e o porte de cada animal
+            const nomePet = pet.querySelector("h3").textContent
+            const especiePet = pet.dataset.especie
+            const portepet = pet.dataset.porte
+
+            //Obter os valores selecionados nos filtros
+            const especieselecionada = filtroEspecie.value
+            const porteselecionado = filtroPorte.value
+
+
+            //verifica se o animal corresponde á especie selecionada
+            const combinaEspecie =
+                especieselecionada === "todos" || especieselecionada === especiePet
+
+            //verifica se o animal corresponde ao porte selecionada
+            const combinaPorte = 
+                porteselecionado === "todos" || porteselecionado === portepet
+
+            //Verifica se o animal está nos favoritos quando estiver ativado
+            const combinaFavoritos = 
+                !mostrandoFavoritos || favoritos.includes(nomePet)
+
+            //Exibir o animal somente se ele atender a todos os criterios
+            if (combinaEspecie && combinaPorte && combinaFavoritos){
+                pet.style.display = ""
+            }
+
+            //Ocultar o animal que não atender aos criterios
+            else{
+                pet.style.display = "none"
+            }
+        })
     }
 
-    atualizarControleModo();
-    btnModo.addEventListener("click", function () {
-      document.body.classList.toggle("modo-escuro");
-      localStorage.setItem(
-        "modoEscuro",
-        document.body.classList.contains("modo-escuro") ? "sim" : "nao"
-      );
-      atualizarControleModo();
-    });
-  }
 
-  const filtroEspecie = document.querySelector("#filtro-especie");
-  const filtroPorte = document.querySelector("#filtro-porte");
-  const pets = document.querySelectorAll(".card-pet");
-  const botaoVerFavoritos = document.querySelector("#ver-favoritos");
-  const botoesFavoritos = document.querySelectorAll(".btn-favorito");
-  let favoritos = JSON.parse(localStorage.getItem("petsFavoritos") || "[]");
-  let mostrandoFavoritos = false;
+        // Executar a função quando o usuário alterar o filtro de porte e especie
+        filtroEspecie.addEventListener("change", atualizarPets)
+        filtroPorte.addEventListener("change", atualizarPets)
 
-  function atualizarPets() {
-    if (!filtroEspecie || !filtroPorte) return;
+        //Adicionar entre mostrar todos os animais e somente os favoritos
+        botaoVerfavoritos.addEventListener("click",function(){
 
-    pets.forEach(function (pet) {
-      const nome = pet.querySelector("h3").textContent.trim();
-      const combinaEspecie =
-        filtroEspecie.value === "todos" ||
-        filtroEspecie.value === pet.dataset.especie;
-      const combinaPorte =
-        filtroPorte.value === "todos" ||
-        filtroPorte.value === pet.dataset.porte;
-      const combinaFavoritos =
-        !mostrandoFavoritos || favoritos.includes(nome);
+        //Alternar entre mostrar todos os animais e somente os favoritos
+        mostrandoFavoritos = !mostrandoFavoritos;
 
-      pet.hidden = !(combinaEspecie && combinaPorte && combinaFavoritos);
-    });
-  }
+            //Alterar o texto do botão conforme a visualização escolhia
+            if (mostrandoFavoritos){
+                botaoVerfavoritos.textContent = "Ver todos os pets"
+            }
+            else {
+                botaoVerfavoritos.textContent = "❤️ Meus Favoritos"
+            }
+             
+        //Atualizar a lista de animais exibidos    
+        atualizarPets()
+        })
 
-  botoesFavoritos.forEach(function (botao) {
-    const card = botao.closest(".card-pet");
-    const nome = card.querySelector("h3").textContent.trim();
+    })
 
-    function atualizarBotao() {
-      const salvo = favoritos.includes(nome);
-      botao.classList.toggle("favoritado", salvo);
-      botao.setAttribute("aria-pressed", String(salvo));
-      botao.setAttribute(
-        "aria-label",
-        (salvo ? "Remover " : "Adicionar ") + nome + " " +
-          (salvo ? "dos" : "aos") + " favoritos"
-      );
-      botao.textContent = salvo ? "♥" : "♡";
-    }
+    
 
-    atualizarBotao();
-    botao.addEventListener("click", function () {
-      favoritos = favoritos.includes(nome)
-        ? favoritos.filter(function (item) { return item !== nome; })
-        : favoritos.concat(nome);
-      localStorage.setItem("petsFavoritos", JSON.stringify(favoritos));
-      atualizarBotao();
-      atualizarPets();
-    });
-  });
 
-  if (filtroEspecie && filtroPorte) {
-    filtroEspecie.addEventListener("change", atualizarPets);
-    filtroPorte.addEventListener("change", atualizarPets);
-  }
 
-  if (botaoVerFavoritos) {
-    botaoVerFavoritos.setAttribute("aria-pressed", "false");
-    botaoVerFavoritos.addEventListener("click", function () {
-      mostrandoFavoritos = !mostrandoFavoritos;
-      botaoVerFavoritos.setAttribute("aria-pressed", String(mostrandoFavoritos));
-      botaoVerFavoritos.textContent = mostrandoFavoritos
-        ? "Ver todos os pets"
-        : "♥ Meus favoritos";
-      atualizarPets();
-    });
-  }
+            
+        
+        
 
-  const seletorPet = document.querySelector("#pet");
-  if (seletorPet) {
-    const petDaUrl = new URLSearchParams(window.location.search).get("pet");
-    if (petDaUrl && Array.from(seletorPet.options).some(function (option) {
-      return option.value === petDaUrl;
-    })) {
-      seletorPet.value = petDaUrl;
-    }
-  }
+    
 
-  const formulario = document.querySelector("#form-adocao");
-  const confirmacao = document.querySelector("#confirmacao-formulario");
-  if (formulario && confirmacao) {
-    formulario.addEventListener("submit", function (event) {
-      event.preventDefault();
-      confirmacao.textContent =
-        "Pedido simulado com sucesso. Este protótipo acadêmico não envia nem armazena seus dados.";
-      confirmacao.hidden = false;
-    });
-  }
-});
+    
