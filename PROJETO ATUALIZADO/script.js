@@ -1,5 +1,76 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function()
+{
+const btnModo = document.querySelector("#btn-modo")
 
+// Recupera a escolha salva
+if (localStorage.getItem("modoEscuro") === "sim")
+{
+    document.body.classList.add("modo-escuro")
+    btnModo.checked = true
+}
+
+// "change" dispara quando o checkbox é ligado/desligado
+btnModo.addEventListener("change", function()
+{
+    if (btnModo.checked)
+    {
+        document.body.classList.add("modo-escuro")
+        localStorage.setItem("modoEscuro", "sim")
+    }
+    else
+    {
+        document.body.classList.remove("modo-escuro")
+        localStorage.setItem("modoEscuro", "nao")
+    }
+})
+
+ // botões e conteúdo para acessbilidade
+
+    const btnAumentar = document.querySelector('[data-fonte="aumentar"]')
+    const btnDiminuir = document.querySelector('[data-fonte="diminuir"]')
+    const btnContraste = document.querySelector("#btn-contraste")
+    
+    let tamanhoFonte = parseInt(localStorage.getItem("tamanhoFonte")) || 100
+
+    function aplicarFonte() 
+    {
+        document.documentElement.style.setProperty("--escala-texto", tamanhoFonte / 100)
+        localStorage.setItem("tamanhoFonte", tamanhoFonte)
+    }
+
+    aplicarFonte()
+
+    btnAumentar.addEventListener("click", function() 
+    {
+        if (tamanhoFonte < 150) {
+            tamanhoFonte += 10
+            aplicarFonte()
+        }
+    })
+
+    btnDiminuir.addEventListener("click", function() 
+    {
+        if (tamanhoFonte > 80) {
+            tamanhoFonte -= 10
+            aplicarFonte()
+        }
+    })
+
+    if (localStorage.getItem("altoContraste") === "sim") 
+    {
+        document.body.classList.add("alto-contraste")
+        btnContraste.setAttribute("aria-pressed", "true")
+    }
+
+    btnContraste.addEventListener("click", function() 
+    {
+        const ativo = document.body.classList.toggle("alto-contraste")
+
+        btnContraste.setAttribute("aria-pressed", ativo)
+        localStorage.setItem("altoContraste", ativo ? "sim" : "nao")
+    })
+
+   
     // Encontrar os filtros de especie
 
     const filtroEspecie = document.querySelector("#filtro-especie");
@@ -19,33 +90,41 @@ document.addEventListener("DOMContentLoaded", function() {
     let favoritos = JSON.parse(localStorage.getItem("petsFavoritos")) || []
 
     //Percorre todos os botões de favoritos
-    botoesFavoritos.forEach(function(botao) {
+    //adicionado conteudo de acessibilidade para leitor de tela
+    botoesFavoritos.forEach(function(botao) 
+    {
 
         //Encontra o card e o nome do animal correspondente ao botão
         const card = botao.closest(".card-pet")
         const nomePet = card.querySelector("h3").textContent
 
+        // Descrição acessível do botão
+        botao.setAttribute("aria-label", "Favoritar " + nomePet)
+        botao.setAttribute("aria-pressed", "false")
+
         //Verifica se o animal ja esta salvo nos favoritos
         if(favoritos.includes(nomePet)){
-           botao.classList.add("favoritado");
+            botao.classList.add("favoritado");
             botao.textContent = "♥"; 
+            botao.setAttribute("aria-pressed", "true") 
         }
 
         //Adicionar um evento de click ao bptão de favorito
-        botao.addEventListener("click",function(){
-
-
+        botao.addEventListener("click",function()
+        {
             //Verificar se o animal ja está na lista de favoritos
-            if(favoritos.includes(nomePet)){
-
+            if(favoritos.includes(nomePet))
+            {
                 // Remover o animal da lista de favoritos
-                favoritos = favoritos.filter(function(nome){
+                favoritos = favoritos.filter(function(nome)
+                {
                     return nome !== nomePet
                 })
 
                 //Alterar o coração para indicar que não esta favoritado
                 botao.classList.remove("favoritado")
                 botao.textContent = "♡"
+                botao.setAttribute("aria-pressed", "false")
             }
             else {
                 /*Adicionar o animal á lista de favoritos e 
@@ -53,13 +132,13 @@ document.addEventListener("DOMContentLoaded", function() {
                 favoritos.push(nomePet)
                 botao.classList.add("favoritado")
                 botao.textContent = "♥"
+                botao.setAttribute("aria-pressed", "true")
             }
 
             /*Salva a lista atualizada no amazenamento do navegador
             /e atualiza os animais exibidos*/
             localStorage.setItem("petsFavoritos",JSON.stringify(favoritos))
              atualizarPets()
-
         })
     })
 
